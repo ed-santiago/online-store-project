@@ -12,6 +12,13 @@ function renderProducts(products) {
 
 function renderProduct(product) {
   const div = document.createElement("div")
-  div.classList.add = "products"
+  div.classList.add("products")
   productSection.append(div)
+
+  div.innerHTML = `
+    <h3>${product.title}</h3>
+    <img src="${product.image}" alt="product image"/>
+    <p>Rating: ${product.rating.rate}</p>
+    <p>Price: ${product.price}</p>
+  `
 }
