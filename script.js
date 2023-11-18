@@ -17,7 +17,7 @@ function renderProduct(product) {
 
   div.innerHTML = `
     <h3>${product.title}</h3>
-    <img src="${product.image}" alt="product image"/>
+    <img class="product-image" src="${product.image}" alt="product image"/>
     <p>Rating: ${product.rating.rate}</p>
     <p>Price: ${product.price}</p>
   `

@@ -126,3 +126,27 @@ form ion-icon {
   font-size: 48px;
   text-align: center;
 }
+
+#product-collection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 50px;
+}
+
+.products {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 15rem;
+  height: 25rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #e04b52
+}
+
+.product-image {
+  justify-self: center;
+  height: 12rem;
+  width: auto;
+}
