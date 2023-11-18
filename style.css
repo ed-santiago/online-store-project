@@ -1,13 +1,14 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 100px;
+  margin: 15px 0px;
   padding: 0;
 }
 
@@ -79,4 +80,28 @@ form ion-icon {
   padding-left: 10px;
   padding-right: 10px;
   font-size: 16px;
+}
+
+#hero {
+  background-image: url("images/herosection.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+  padding-top: 100px;
+  padding-left: 300px;
+}
+
+#hero h1 {
+  margin: 0;
+  color: antiquewhite;
+  font-size: 80px;
+  font-weight: normal;
+  display: inline-block;
+  text-align: center;
+}
+
+#fifty-off {
+  font-size: 120px;
+  font-weight: bold;
 }
