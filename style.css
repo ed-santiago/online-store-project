@@ -48,3 +48,35 @@ header div ul li a {
   color: black;
   font-size: 24px;
 }
+
+header form {
+  width: 350px;
+  height: 45px;
+  background-color: lightgray;
+  display: flex;
+
+}
+
+#input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+#submit-btn {
+  background: gray;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form ion-icon {
+  align-self: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+}
