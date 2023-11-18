@@ -31,3 +31,20 @@ header nav ul li a{
   color: black;
   font-size: 18px;
 }
+
+header div ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header div ul li {
+  display: inline-block;
+  padding: 0px 15px;
+}
+
+header div ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
