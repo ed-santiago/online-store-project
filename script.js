@@ -16,9 +16,14 @@ function renderProduct(product) {
   productSection.append(div)
 
   div.innerHTML = `
-    <h3>${product.title}</h3>
-    <img class="product-image" src="${product.image}" alt="product image"/>
-    <p>Rating: ${product.rating.rate}</p>
-    <p>Price: ${product.price}</p>
+    <div class="img-div">
+      <img class="product-image" src="${product.image}" alt="product image"/>
+    </div>
+    <div class="product-info">
+      <p>${product.category}</p>
+      <h3>${product.title}</h3>
+      <p>Rating: ${product.rating.rate}</p>
+      <p>Price: ${product.price}</p>
+    <div 
   `
 }

@@ -2,6 +2,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 header {
@@ -130,11 +137,30 @@ form ion-icon {
 #product-collection {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  padding: 50px;
+  grid-gap: 60px;
+  padding: 50px 120px;
 }
 
 .products {
+  border: 3px solid lightgray;
+  padding: 16px;
+}
+
+.img-div {
+  padding: 10px;
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 1 /1 ;
+  object-fit: contain;
+}
+
+.product-info > * {
+  margin: 5px 0px;
+}
+
+/*.products {
   text-align: center;
   border: grey solid 1px;
   padding: 1rem;
@@ -149,4 +175,4 @@ form ion-icon {
   justify-self: center;
   height: 12rem;
   width: auto;
-}
+}*/
