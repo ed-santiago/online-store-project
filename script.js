@@ -20,23 +20,26 @@ function renderProduct(product) {
       <img class="product-image" src="${product.image}" alt="product image"/>
     </div>
     <div class="product-info">
-      <p>${product.category}</p>
+      <div class="category-and-rating">
+        <div>
+          <p>${product.category}</p>
+        </div>
+        <div class="rating">
+          <p>${product.rating.rate} ${starRating(product.rating.rate)} (${product.rating.count})</p>
+        </div>
+      </div>
       <h3>${product.title}</h3>
-      <p class="star-rating">Rating: </p>
       <p>Price: ${product.price}</p>
-    <div 
-  `
-
-  const p = document.querySelector(".star-rating")
-
-  let rating = "";
-
-  for(let i = 0; i <= product.rating.rate; i++) {
-
-  }
-
-  console.log(product.rating.rate)
+    </div>
+    `
 }
 
+function starRating(rating) {
+  let ratingStar = "";
 
+  for(let i = 1; i <= rating; i++) {
+    ratingStar += "<ion-icon name=\"star\"></ion-icon>"
+  }
 
+  return ratingStar;
+}

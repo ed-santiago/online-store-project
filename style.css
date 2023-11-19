@@ -161,6 +161,21 @@ form ion-icon {
   margin: 5px 0px;
 }
 
+.category-and-rating > * {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px;
+}
+
+.rating {
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 p ion-icon {
   color: gold;
 }
