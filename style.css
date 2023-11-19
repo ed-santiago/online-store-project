@@ -161,6 +161,10 @@ form ion-icon {
   margin: 5px 0px;
 }
 
+p ion-icon {
+  color: gold;
+}
+
 /*.products {
   text-align: center;
   border: grey solid 1px;

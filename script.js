@@ -22,8 +22,21 @@ function renderProduct(product) {
     <div class="product-info">
       <p>${product.category}</p>
       <h3>${product.title}</h3>
-      <p>Rating: ${product.rating.rate}</p>
+      <p class="star-rating">Rating: </p>
       <p>Price: ${product.price}</p>
     <div 
   `
+
+  const p = document.querySelector(".star-rating")
+
+  let rating = "";
+
+  for(let i = 0; i <= product.rating.rate; i++) {
+
+  }
+
+  console.log(product.rating.rate)
 }
+
+
+
