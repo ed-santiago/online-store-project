@@ -21,12 +21,8 @@ function renderProduct(product) {
     </div>
     <div class="product-info">
       <div class="category-and-rating">
-        <div>
-          <p>${product.category}</p>
-        </div>
-        <div class="rating">
-          <p>${product.rating.rate} ${starRating(product.rating.rate)} (${product.rating.count})</p>
-        </div>
+        <p>${product.category}</p>
+        <p>${starRating(product.rating.rate)}
       </div>
       <h3>${product.title}</h3>
       <p>Price: ${product.price}</p>
