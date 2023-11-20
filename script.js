@@ -19,18 +19,6 @@ function renderProduct(product) {
   div.classList.add("products")
   productSection.append(div)
 
-  /*const imgDiv = document.createElement("div")
-  imgDiv.classList.add("img-div");
-  div.append(imgDiv);
-  const img = document.createElement("img");
-  img.classList.add("product-image");
-  img.src = product.image;
-  img.alt = "product image";
-  imgDiv.append(img)
-
-  const productInfoDiv = document.createElement("div");
-  productInfoDiv.classList.add*/
-
   div.innerHTML = `
     <div class="img-div">
       <img class="product-image" src="${product.image}" alt="product image"/>
@@ -41,22 +29,33 @@ function renderProduct(product) {
         <p>${starRating(product.rating.rate)}
       </div>
       <h3>${product.title}</h3>
-      <p>${product.price = 10}</p>
+      ${sale()}
     </div>
     `
-  /*<p class="price">Price: ${product.price}</p>
-
-  const p = document.createElement("p");
-  p.classList.add = "price";
-  p.textContent = product.price;
-  
-  console.log(document.querySelector(".product-info")).append(p)*/
 
   function sale() {
-    let priceHTML = `${product.price}`;
+    let priceHTML = `
+    <div class="price">
+      <p>${product.price.originalPrice}</p>
+    </div>
+    `
 
     if(product.category === "men's clothing") {
-      priceHTML = `${Math.round(product.price * 0.5)}`
+      priceHTML = `
+      <div class="price">
+        <p><s>${product.price.originalPrice}</s></p>
+        <p>${product.price.salePrice}</p>
+      </div>
+      `
+    }
+
+    if(product.category === "women's clothing") {
+      priceHTML = `
+      <div class="price">
+        <p><s>${product.price.originalPrice}</s></p>
+        <p>${product.price.salePrice}</p>
+      </div>
+      `
     }
 
     return priceHTML;

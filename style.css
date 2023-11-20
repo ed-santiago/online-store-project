@@ -172,6 +172,12 @@ form ion-icon {
   align-items: center;
 }
 
+.price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 p ion-icon {
   color: gold;
 }
