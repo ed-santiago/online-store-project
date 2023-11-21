@@ -210,3 +210,18 @@ form ion-icon {
 p ion-icon {
   color: gold;
 }
+
+/*---Modal---*/
+
+#modal {
+  width: 500px;
+  background-color: gray;
+  position: fixed;
+  inset: 95px 0 auto auto;
+  padding: 0px;
+}
+
+#modal h1 {
+  padding: 0;
+  margin: 0;
+}

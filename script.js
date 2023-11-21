@@ -117,6 +117,14 @@ function starRating(rating) {
   return ratingStar;
 }
 
+//Modal
+
+const cart = document.querySelector("#cart")
+cart.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.showModal();
+})
+
 /*const div = document.createElement("div")
   div.classList.add("product-card")
   productSection.append(div)
