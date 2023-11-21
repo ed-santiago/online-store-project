@@ -155,10 +155,6 @@ form ion-icon {
   transition: all 0.3s;
 }
 
-.product-card:hover {
-  transform: scale(1.05);
-}
-
 .img-div {
   padding: 10px;
 }

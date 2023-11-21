@@ -54,7 +54,18 @@ function renderProduct(product) {
     return priceHTML;
   }
 
+  //Hover over product cards
+
+  div.addEventListener("mouseenter", () => {
+    div.style.transform = "scale(1.05)"
+  })
+
+  div.addEventListener("mouseleave", () => {
+    div.style.transform = "scale(1)"
+  })
+  
 }
+
 
 //star rating for product cards
 
