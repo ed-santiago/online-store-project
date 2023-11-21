@@ -21,6 +21,11 @@ function renderProduct(product) {
 
   div.innerHTML = `
     <div class="img-div">
+      <div class="card-buttons">
+        <button type="button"><ion-icon name="eye-outline"></ion-icon></button>
+        <button type="button"><ion-icon name="cart"></ion-icon></button>
+        <button type="button"><ion-icon name="heart"></ion-icon></button>
+      </div>
       <img class="product-image" src="${product.image}" alt="product image"/>
     </div>
     <div class="product-info">
@@ -41,8 +46,7 @@ function renderProduct(product) {
       <p>${product.price.originalPrice}</p>
     </div>
     `
-
-    if(product.category === "men's clothing" || product.category === "women's clothing") {
+    if (product.category === "men's clothing" || product.category === "women's clothing") {
       priceHTML = `
       <div class="price">
         <p><s>${product.price.originalPrice}</s></p>
@@ -50,22 +54,20 @@ function renderProduct(product) {
       </div>
       `
     }
-
     return priceHTML;
   }
 
   //Hover over product cards
 
   div.addEventListener("mouseenter", () => {
-    div.style.transform = "scale(1.05)"
+    div.style.transform = "scale(1.05)";
   })
 
   div.addEventListener("mouseleave", () => {
-    div.style.transform = "scale(1)"
+    div.style.transform = "scale(1)";
   })
-  
-}
 
+}
 
 //star rating for product cards
 
@@ -78,3 +80,61 @@ function starRating(rating) {
 
   return ratingStar;
 }
+
+/*Product Cards
+const div = document.createElement("div")
+div.classList.add("product-card")
+productSection.append(div)
+
+//Image and Buttons
+const imgDiv = document.createElement("div")
+imgDiv.classList.add("img-div")
+imgDiv.classList.add("stacked")
+div.append(imgDiv)
+
+const img = document.createElement("img")
+img.classList.add("product-image")
+img.src = product.image
+img.alt = "product image"
+imgDiv.append(img)
+
+const cardBtnsDiv = document.createElement("div")
+cardBtnsDiv.classList.add("card-buttons")
+imgDiv.append(cardBtnsDiv)
+
+//Buttons
+const cartBtn = document.createElement("button")
+cartBtn.type = "button"
+cartBtn.innerHTML = "<ion-icon name=\"cart\"></ion-icon>"
+cardBtnsDiv.append(cartBtn)
+
+const heartBtn = document.createElement("button")
+heartBtn.type = "button"
+heartBtn.innerHTML = "<ion-icon name=\"heart\"></ion-icon>"
+cardBtnsDiv.append(heartBtn)
+
+//Info
+const infoDiv = document.createElement("div")
+infoDiv.classList.add("product-info")
+div.append(infoDiv)
+
+const categoryAndRatingDiv = document.createElement("div")
+categoryAndRatingDiv.classList.add("category-and-rating")
+infoDiv.append(categoryAndRatingDiv)
+
+const pCategory = document.createElement("p")
+pCategory.textContent = product.category;
+categoryAndRatingDiv.append(pCategory)
+
+const pRating = document.createElement("p")
+pRating.innerHTML = starRating(product.rating.rate)
+categoryAndRatingDiv.append(pRating)
+
+const productTitle = document.createElement("h3")
+productTitle.textContent = product.title
+infoDiv.append(productTitle)
+
+const priceDiv = document.createElement("p")
+priceDiv.classList.add("price")
+priceDiv.innerHTML = sale()
+infoDiv.append(priceDiv)*/
