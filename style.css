@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   max-width: 100%;
   max-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
@@ -25,6 +26,10 @@ header h1 {
   margin: 15px 0px;
 }
 
+header nav {
+  justify-self: flex-start;
+}
+
 header nav ul {
   list-style: none;
   margin: 0;
@@ -33,7 +38,7 @@ header nav ul {
 
 header nav ul li {
   display: inline-block;
-  padding: 0px 15px;
+  padding: 0px 30px;
 }
 
 header nav ul li a{
@@ -50,7 +55,7 @@ header div ul {
 
 header div ul li {
   display: inline-block;
-  padding: 0px 15px;
+  padding: 0px 24px;
 }
 
 header div ul li a {
@@ -131,6 +136,7 @@ form ion-icon {
   text-align: center;
   text-decoration: none;
   font-size: 24px;
+  rotate: -4deg;
 }
 
 /*---PRODUCT SECTION---*/
@@ -198,6 +204,7 @@ form ion-icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 24px;
 }
 
 p ion-icon {
