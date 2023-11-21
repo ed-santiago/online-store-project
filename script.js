@@ -16,7 +16,7 @@ function renderProducts(products) {
 
 function renderProduct(product) {
   const div = document.createElement("div")
-  div.classList.add("products")
+  div.classList.add("product-card")
   productSection.append(div)
 
   div.innerHTML = `
@@ -33,6 +33,8 @@ function renderProduct(product) {
     </div>
     `
 
+  //set price to sale
+
   function sale() {
     let priceHTML = `
     <div class="price">
@@ -40,16 +42,7 @@ function renderProduct(product) {
     </div>
     `
 
-    if(product.category === "men's clothing") {
-      priceHTML = `
-      <div class="price">
-        <p><s>${product.price.originalPrice}</s></p>
-        <p>${product.price.salePrice}</p>
-      </div>
-      `
-    }
-
-    if(product.category === "women's clothing") {
+    if(product.category === "men's clothing" || product.category === "women's clothing") {
       priceHTML = `
       <div class="price">
         <p><s>${product.price.originalPrice}</s></p>
@@ -74,9 +67,3 @@ function starRating(rating) {
 
   return ratingStar;
 }
-
-const randomNumber = Math.round(Math.random() * 5);
-console.log(randomNumber)
-
-//set price to sale
-
