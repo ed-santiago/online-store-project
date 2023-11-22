@@ -1,7 +1,39 @@
 const productAPI = "http://localhost:3000/products"
+const cartAPI = "http://localhost:3000/cart"
+const favouriteAPI = "http://localhost:3000/favourite"
 
 const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
+
+//Count to cart and heart
+
+const cartCount = document.querySelector("#cart p")
+if (cartCount.textContent < 1) {
+  cartCount.style.display = "none"
+} else {
+  cartCount.style.display = "block"
+}
+
+const heartCount = document.querySelector("#heart p")
+if (heartCount.textContent < 1) {
+  heartCount.style.display = "none"
+} else {
+  heartCount.style.display = "block"
+}
+
+//Modal
+
+const cart = document.querySelector("#cart")
+cart.addEventListener("click", e => {
+  e.preventDefault();
+  modal.showModal();
+})
+
+const cartBackButton = document.querySelector("#modal-header button")
+cartBackButton.addEventListener("click", e => {
+  e.preventDefault();
+  modal.close();
+})
 
 //Render product onto page
 
@@ -78,6 +110,23 @@ function renderProduct(product) {
   priceDiv.innerHTML = sale()
   infoDiv.append(priceDiv)
 
+  cartBtn.addEventListener("click", (e) => {
+    fetch(cartAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: `${product.title}`,
+        quantity: 1,
+        price: product.price.originalPrice,
+        salePrice: product.price.salePrice
+      })
+    })
+    .then(res => res.json())
+    .then(json => console.log(json))
+  })
+
   //set price to sale
 
   function sale() {
@@ -116,36 +165,6 @@ function starRating(rating) {
 
   return ratingStar;
 }
-
-//Count to cart and heart
-
-const cartCount = document.querySelector("#cart p")
-if (cartCount.textContent < 1) {
-  cartCount.style.display = "none"
-} else {
-  cartCount.style.display = "block"
-}
-
-const heartCount = document.querySelector("#heart p")
-if (heartCount.textContent < 1) {
-  heartCount.style.display = "none"
-} else {
-  heartCount.style.display = "block"
-}
-
-//Modal
-
-const cart = document.querySelector("#cart")
-cart.addEventListener("click", e => {
-  e.preventDefault();
-  modal.showModal();
-})
-
-const cartBackButton = document.querySelector("#modal-header button")
-cartBackButton.addEventListener("click", e => {
-  e.preventDefault();
-  modal.close();
-})
 
 /*const div = document.createElement("div")
   div.classList.add("product-card")

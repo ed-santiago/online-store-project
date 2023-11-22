@@ -266,6 +266,7 @@ p ion-icon {
 
 #modal[open] {
   width: 500px;
+  height: 840px;
   background-color: white;
   position: fixed;
   inset: 67px 0 auto auto;
