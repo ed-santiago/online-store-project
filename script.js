@@ -17,66 +17,66 @@ function renderProducts(products) {
 function renderProduct(product) {
   //Product Cards
   const div = document.createElement("div")
-    div.classList.add("product-card")
-    productSection.append(div)
+  div.classList.add("product-card")
+  productSection.append(div)
 
   //Image and buttons div
   const imgAndBtnsDiv = document.createElement("div")
-    imgAndBtnsDiv.classList.add("img-div")
-    div.append(imgAndBtnsDiv)
+  imgAndBtnsDiv.classList.add("img-div")
+  div.append(imgAndBtnsDiv)
 
   const cardBtnsDiv = document.createElement("div")
-    cardBtnsDiv.classList.add("card-buttons")
-    imgAndBtnsDiv.append(cardBtnsDiv)
+  cardBtnsDiv.classList.add("card-buttons")
+  imgAndBtnsDiv.append(cardBtnsDiv)
 
   //Buttons
   const viewBtn = document.createElement("button")
-    viewBtn.type = "button"
-    viewBtn.innerHTML = "<ion-icon name=\"eye\"></ion-icon>"
-    cardBtnsDiv.append(viewBtn)
+  viewBtn.type = "button"
+  viewBtn.innerHTML = "<ion-icon name=\"eye\"></ion-icon>"
+  cardBtnsDiv.append(viewBtn)
 
   const cartBtn = document.createElement("button")
-    cartBtn.type = "button"
-    cartBtn.innerHTML = "<ion-icon name=\"cart\"></ion-icon>"
-    cardBtnsDiv.append(cartBtn)
+  cartBtn.type = "button"
+  cartBtn.innerHTML = "<ion-icon name=\"cart\"></ion-icon>"
+  cardBtnsDiv.append(cartBtn)
 
   const heartBtn = document.createElement("button")
-    heartBtn.type = "button"
-    heartBtn.innerHTML = "<ion-icon name=\"heart\"></ion-icon>"
-    cardBtnsDiv.append(heartBtn)
+  heartBtn.type = "button"
+  heartBtn.innerHTML = "<ion-icon name=\"heart\"></ion-icon>"
+  cardBtnsDiv.append(heartBtn)
 
   //Image
   const img = document.createElement("img")
-    img.classList.add("product-image")
-    img.src = product.image
-    img.alt = "product image"
-    imgAndBtnsDiv.append(img)
+  img.classList.add("product-image")
+  img.src = product.image
+  img.alt = "product image"
+  imgAndBtnsDiv.append(img)
 
   //Info
   const infoDiv = document.createElement("div")
-    infoDiv.classList.add("product-info")
-    div.append(infoDiv)
+  infoDiv.classList.add("product-info")
+  div.append(infoDiv)
 
   const categoryAndRatingDiv = document.createElement("div")
-    categoryAndRatingDiv.classList.add("category-and-rating")
-    infoDiv.append(categoryAndRatingDiv)
+  categoryAndRatingDiv.classList.add("category-and-rating")
+  infoDiv.append(categoryAndRatingDiv)
 
   const pCategory = document.createElement("p")
-    pCategory.textContent = product.category;
-    categoryAndRatingDiv.append(pCategory)
+  pCategory.textContent = product.category;
+  categoryAndRatingDiv.append(pCategory)
 
   const pRating = document.createElement("p")
-    pRating.innerHTML = starRating(product.rating.rate)
-    categoryAndRatingDiv.append(pRating)
+  pRating.innerHTML = starRating(product.rating.rate)
+  categoryAndRatingDiv.append(pRating)
 
   const productTitle = document.createElement("h3")
-    productTitle.textContent = product.title
-    infoDiv.append(productTitle)
+  productTitle.textContent = product.title
+  infoDiv.append(productTitle)
 
   const priceDiv = document.createElement("p")
-    priceDiv.classList.add("price")
-    priceDiv.innerHTML = sale()
-    infoDiv.append(priceDiv)
+  priceDiv.classList.add("price")
+  priceDiv.innerHTML = sale()
+  infoDiv.append(priceDiv)
 
   //set price to sale
 
@@ -120,14 +120,14 @@ function starRating(rating) {
 //Count to cart and heart
 
 const cartCount = document.querySelector("#cart p")
-if(cartCount.textContent < 1) {
+if (cartCount.textContent < 1) {
   cartCount.style.display = "none"
 } else {
   cartCount.style.display = "block"
 }
 
 const heartCount = document.querySelector("#heart p")
-if(heartCount.textContent < 1) {
+if (heartCount.textContent < 1) {
   heartCount.style.display = "none"
 } else {
   heartCount.style.display = "block"
