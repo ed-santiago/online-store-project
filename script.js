@@ -128,21 +128,58 @@ function renderProduct(product) {
     })
     .then(res => res.json())
     .then(cartItem => {
+      //Image
       const itemDiv = document.createElement("div")
-      itemDiv.classList.add("item");
+      itemDiv.classList.add("item")
       productCart.append(itemDiv)
 
-      const itemAndInfoDiv = document.createElement("div")
-      itemAndInfoDiv.classList.add("item-and-info");
-      itemDiv.append(itemAndInfoDiv)
-
       const cartImg = document.createElement("img")
-      cartImg.src = cartItem.image;
-      itemAndInfoDiv.append(cartImg)
+      cartImg.src = cartItem.image
+      itemDiv.append(cartImg)
 
-      const cartP = document.createElement("p")
-      cartP.textContent = cartItem.title;
-      itemAndInfoDiv.append(cartP)
+      //Title
+      const titleDiv = document.createElement("div")
+      titleDiv.classList.add("title")
+      productCart.append(titleDiv)
+
+      const titleP = document.createElement("p")
+      titleP.textContent = cartItem.title;
+      titleDiv.append(titleP)
+
+      //Quantity
+      const quantityDiv = document.createElement("div")
+      quantityDiv.classList.add("quantity")
+      productCart.append(quantityDiv)
+
+      const leftBtn = document.createElement("button")
+      leftBtn.innerHTML = "<ion-icon name=\"caret-back-outline\"></ion-icon>"
+      quantityDiv.append(leftBtn)
+
+      const quantityP = document.createElement("p")
+      quantityP.textContent = cartItem.quantity
+      quantityDiv.append(quantityP)
+
+      const rightBtn = document.createElement("button")
+      rightBtn.innerHTML = "<ion-icon name=\"caret-forward-outline\"></ion-icon>"
+      quantityDiv.append(rightBtn)
+
+      //Price
+      const priceCartDiv = document.createElement("div")
+      priceCartDiv.classList.add("price")
+      productCart.append(priceCartDiv)
+
+      const priceCartP = document.createElement("p")
+      priceCartP.textContent = cartItem.price
+      priceCartDiv.append(priceCartP)
+
+      //Remove
+      const removeDiv = document.createElement("div")
+      removeDiv.classList.add("remove")
+      productCart.append(removeDiv)
+
+      const removeBtn = document.createElement("button")
+      removeBtn.textContent = "REMOVE"
+      removeDiv.append(removeBtn)
     })
   })
 
@@ -224,3 +261,19 @@ function starRating(rating) {
         <p>${cartItem.price}</p>
       </div>
       `*/
+
+      /*const itemDiv = document.createElement("div")
+      itemDiv.classList.add("item");
+      productCart.append(itemDiv)
+
+      const itemAndInfoDiv = document.createElement("div")
+      itemAndInfoDiv.classList.add("item-and-info");
+      itemDiv.append(itemAndInfoDiv)
+
+      const cartImg = document.createElement("img")
+      cartImg.src = cartItem.image;
+      itemAndInfoDiv.append(cartImg)
+
+      const cartP = document.createElement("p")
+      cartP.textContent = cartItem.title;
+      itemAndInfoDiv.append(cartP)*/
