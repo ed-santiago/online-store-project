@@ -311,12 +311,44 @@
       "id": 1
     },
     {
+      "image": "images/3-jacket.jpg",
+      "title": "Mens Cotton Jacket",
+      "quantity": 1,
+      "price": 100,
+      "salePrice": 50,
+      "id": 2
+    },
+    {
+      "image": "images/4-blueshirt.jpg",
+      "title": "Mens Casual Slim Fit",
+      "quantity": 1,
+      "price": 90,
+      "salePrice": 63,
+      "id": 3
+    },
+    {
       "image": "images/6-bracelet.jpg",
       "title": "Solid Gold Petite Micropave ",
       "quantity": 1,
       "price": 200,
       "salePrice": 0,
-      "id": 2
+      "id": 4
+    },
+    {
+      "image": "images/7-ring.jpg",
+      "title": "White Gold Plated Princess",
+      "quantity": 1,
+      "price": 100,
+      "salePrice": 0,
+      "id": 5
+    },
+    {
+      "image": "images/8-earrings.jpg",
+      "title": "Pierced Owl",
+      "quantity": 1,
+      "price": 10,
+      "salePrice": 0,
+      "id": 6
     },
     {
       "image": "images/13-monitor.jpg",
@@ -324,63 +356,7 @@
       "quantity": 1,
       "price": 600,
       "salePrice": 0,
-      "id": 3
-    },
-    {
-      "image": "images/2-blackandwhiteshirt.jpg",
-      "title": "Mens Casual Premium Slim Fit T-Shirts ",
-      "quantity": 1,
-      "price": 80,
-      "salePrice": 48,
-      "id": 4
-    },
-    {
-      "image": "images/2-blackandwhiteshirt.jpg",
-      "title": "Mens Casual Premium Slim Fit T-Shirts ",
-      "quantity": 1,
-      "price": 80,
-      "salePrice": 48,
-      "id": 5
-    },
-    {
-      "image": "images/6-bracelet.jpg",
-      "title": "Solid Gold Petite Micropave ",
-      "quantity": 1,
-      "price": 200,
-      "salePrice": 0,
-      "id": 6
-    },
-    {
-      "image": "images/14-monitor.jpg",
-      "title": "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor",
-      "quantity": 1,
-      "price": 1000,
-      "salePrice": 0,
       "id": 7
-    },
-    {
-      "image": "images/2-blackandwhiteshirt.jpg",
-      "title": "Mens Casual Premium Slim Fit T-Shirts ",
-      "quantity": 1,
-      "price": 80,
-      "salePrice": 48,
-      "id": 8
-    },
-    {
-      "image": "images/6-bracelet.jpg",
-      "title": "Solid Gold Petite Micropave ",
-      "quantity": 1,
-      "price": 200,
-      "salePrice": 0,
-      "id": 9
-    },
-    {
-      "image": "images/10-internalssd.jpg",
-      "title": "SanDisk SSD - SATA III 6 Gb/s",
-      "quantity": 1,
-      "price": 110,
-      "salePrice": 0,
-      "id": 10
     }
   ],
   "favourite": []

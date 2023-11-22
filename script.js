@@ -112,7 +112,7 @@ function renderProduct(product) {
   priceDiv.innerHTML = sale()
   infoDiv.append(priceDiv)
 
-  cartBtn.addEventListener("click", (e) => {
+  cartBtn.addEventListener("click", () => {
     fetch(cartAPI, {
       method: "POST",
       headers: {
@@ -127,60 +127,7 @@ function renderProduct(product) {
       })
     })
     .then(res => res.json())
-    .then(cartItem => {
-      //Image
-      const itemDiv = document.createElement("div")
-      itemDiv.classList.add("item")
-      productCart.append(itemDiv)
-
-      const cartImg = document.createElement("img")
-      cartImg.src = cartItem.image
-      itemDiv.append(cartImg)
-
-      //Title
-      const titleDiv = document.createElement("div")
-      titleDiv.classList.add("title")
-      productCart.append(titleDiv)
-
-      const titleP = document.createElement("p")
-      titleP.textContent = cartItem.title;
-      titleDiv.append(titleP)
-
-      //Quantity
-      const quantityDiv = document.createElement("div")
-      quantityDiv.classList.add("quantity")
-      productCart.append(quantityDiv)
-
-      const leftBtn = document.createElement("button")
-      leftBtn.innerHTML = "<ion-icon name=\"caret-back-outline\"></ion-icon>"
-      quantityDiv.append(leftBtn)
-
-      const quantityP = document.createElement("p")
-      quantityP.textContent = cartItem.quantity
-      quantityDiv.append(quantityP)
-
-      const rightBtn = document.createElement("button")
-      rightBtn.innerHTML = "<ion-icon name=\"caret-forward-outline\"></ion-icon>"
-      quantityDiv.append(rightBtn)
-
-      //Price
-      const priceCartDiv = document.createElement("div")
-      priceCartDiv.classList.add("price")
-      productCart.append(priceCartDiv)
-
-      const priceCartP = document.createElement("p")
-      priceCartP.textContent = cartItem.price
-      priceCartDiv.append(priceCartP)
-
-      //Remove
-      const removeDiv = document.createElement("div")
-      removeDiv.classList.add("remove")
-      productCart.append(removeDiv)
-
-      const removeBtn = document.createElement("button")
-      removeBtn.textContent = "REMOVE"
-      removeDiv.append(removeBtn)
-    })
+    .then(cartItem => renderCartItem(cartItem))
   })
 
   //set price to sale
@@ -221,6 +168,140 @@ function starRating(rating) {
 
   return ratingStar;
 }
+
+fetch(cartAPI)
+.then(res => res.json())
+.then(cartItems => renderCartItems(cartItems))
+
+function renderCartItems(cartItems) {
+  cartItems.forEach(cartItem => renderCartItem(cartItem))
+}
+
+function renderCartItem(cartItem) {
+  //Image
+  const itemDiv = document.createElement("div")
+  itemDiv.classList.add("item")
+  productCart.append(itemDiv)
+
+  const cartImg = document.createElement("img")
+  cartImg.src = cartItem.image
+  itemDiv.append(cartImg)
+
+  //Title
+  const titleDiv = document.createElement("div")
+  titleDiv.classList.add("title")
+  productCart.append(titleDiv)
+
+  const titleP = document.createElement("p")
+  titleP.textContent = cartItem.title;
+  titleDiv.append(titleP)
+
+  //Quantity
+  const quantityDiv = document.createElement("div")
+  quantityDiv.classList.add("quantity")
+  productCart.append(quantityDiv)
+
+  const leftBtn = document.createElement("button")
+  leftBtn.innerHTML = "<ion-icon name=\"caret-back-outline\"></ion-icon>"
+  quantityDiv.append(leftBtn)
+
+  const quantityP = document.createElement("p")
+  quantityP.textContent = cartItem.quantity
+  quantityDiv.append(quantityP)
+
+  const rightBtn = document.createElement("button")
+  rightBtn.innerHTML = "<ion-icon name=\"caret-forward-outline\"></ion-icon>"
+  quantityDiv.append(rightBtn)
+
+  //Price
+  const priceCartDiv = document.createElement("div")
+  priceCartDiv.classList.add("price")
+  productCart.append(priceCartDiv)
+
+  const priceCartP = document.createElement("p")
+  priceCartP.textContent = cartItem.price
+  priceCartDiv.append(priceCartP)
+
+  //Remove
+  const removeDiv = document.createElement("div")
+  removeDiv.classList.add("remove")
+  productCart.append(removeDiv)
+
+  const removeBtn = document.createElement("button")
+  removeBtn.textContent = "REMOVE"
+  removeDiv.append(removeBtn)
+}
+
+/*cartBtn.addEventListener("click", () => {
+  fetch(cartAPI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      image: `${product.image}`,
+      title: `${product.title}`,
+      quantity: 1,
+      price: product.price.originalPrice,
+      salePrice: product.price.salePrice
+    })
+  })
+  .then(res => res.json())
+  .then(cartItem => {
+    //Image
+    const itemDiv = document.createElement("div")
+    itemDiv.classList.add("item")
+    productCart.append(itemDiv)
+
+    const cartImg = document.createElement("img")
+    cartImg.src = cartItem.image
+    itemDiv.append(cartImg)
+
+    //Title
+    const titleDiv = document.createElement("div")
+    titleDiv.classList.add("title")
+    productCart.append(titleDiv)
+
+    const titleP = document.createElement("p")
+    titleP.textContent = cartItem.title;
+    titleDiv.append(titleP)
+
+    //Quantity
+    const quantityDiv = document.createElement("div")
+    quantityDiv.classList.add("quantity")
+    productCart.append(quantityDiv)
+
+    const leftBtn = document.createElement("button")
+    leftBtn.innerHTML = "<ion-icon name=\"caret-back-outline\"></ion-icon>"
+    quantityDiv.append(leftBtn)
+
+    const quantityP = document.createElement("p")
+    quantityP.textContent = cartItem.quantity
+    quantityDiv.append(quantityP)
+
+    const rightBtn = document.createElement("button")
+    rightBtn.innerHTML = "<ion-icon name=\"caret-forward-outline\"></ion-icon>"
+    quantityDiv.append(rightBtn)
+
+    //Price
+    const priceCartDiv = document.createElement("div")
+    priceCartDiv.classList.add("price")
+    productCart.append(priceCartDiv)
+
+    const priceCartP = document.createElement("p")
+    priceCartP.textContent = cartItem.price
+    priceCartDiv.append(priceCartP)
+
+    //Remove
+    const removeDiv = document.createElement("div")
+    removeDiv.classList.add("remove")
+    productCart.append(removeDiv)
+
+    const removeBtn = document.createElement("button")
+    removeBtn.textContent = "REMOVE"
+    removeDiv.append(removeBtn)
+  })
+})*/
 
 /*const div = document.createElement("div")
   div.classList.add("product-card")
