@@ -23,6 +23,8 @@ if (heartCount.textContent < 1) {
 
 //Modal
 
+const productCart = document.querySelector("#product-cart")
+
 const cart = document.querySelector("#cart")
 cart.addEventListener("click", e => {
   e.preventDefault();
@@ -117,6 +119,7 @@ function renderProduct(product) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        image: `${product.image}`,
         title: `${product.title}`,
         quantity: 1,
         price: product.price.originalPrice,
@@ -124,7 +127,23 @@ function renderProduct(product) {
       })
     })
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(cartItem => {
+      const itemDiv = document.createElement("div")
+      itemDiv.classList.add("item");
+      productCart.append(itemDiv)
+
+      const itemAndInfoDiv = document.createElement("div")
+      itemAndInfoDiv.classList.add("item-and-info");
+      itemDiv.append(itemAndInfoDiv)
+
+      const cartImg = document.createElement("img")
+      cartImg.src = cartItem.image;
+      itemAndInfoDiv.append(cartImg)
+
+      const cartP = document.createElement("p")
+      cartP.textContent = cartItem.title;
+      itemAndInfoDiv.append(cartP)
+    })
   })
 
   //set price to sale
@@ -188,3 +207,20 @@ function starRating(rating) {
       ${sale()}
     </div>
     `*/
+
+    /*productCart.innerHTML = `
+      <div id="item">
+        <div id="item-and-info">
+          <img src="${cartItem.image}" />
+          <p>${cartItem.title}</p>
+        </div>
+      </div>
+
+      <div id="quantity">
+        <p>${cartItem.quantity}</p>
+      </div>
+
+      <div id="price">
+        <p>${cartItem.price}</p>
+      </div>
+      `*/
