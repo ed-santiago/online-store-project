@@ -25,6 +25,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 1;
+  border-bottom: 2px solid black;
 }
 
 header h1 {
@@ -267,15 +268,33 @@ p ion-icon {
   width: 500px;
   background-color: white;
   position: fixed;
-  inset: 64px 0 auto auto;
+  inset: 67px 0 auto auto;
   padding: 10px;
-  border-color: white;
+  border: 2px solid black;
 }
 
-#modal h1 {
-  padding: 0;
+#modal::backdrop {
+  background-color: rgba(0,0,0,0);
+}
+
+#modal-header {
+  padding: 10px 24px;
   margin: 0;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+#modal-header > * {
+  margin: 0;
+}
+
+#modal-header button {
+  font-size: 2em;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #product-cart {

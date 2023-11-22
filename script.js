@@ -136,9 +136,15 @@ if (heartCount.textContent < 1) {
 //Modal
 
 const cart = document.querySelector("#cart")
-cart.addEventListener("click", (e) => {
+cart.addEventListener("click", e => {
   e.preventDefault();
   modal.showModal();
+})
+
+const cartBackButton = document.querySelector("#modal-header button")
+cartBackButton.addEventListener("click", e => {
+  e.preventDefault();
+  modal.close();
 })
 
 /*const div = document.createElement("div")
