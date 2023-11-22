@@ -50,21 +50,51 @@ header nav ul li a{
   font-size: 18px;
 }
 
-header div ul {
+#login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-header div ul li {
-  display: inline-block;
-  padding: 0px 24px;
+#login-container div {
+  margin: 0px 24px;
+  padding: 8px;
 }
 
-header div ul li a {
+#login-container div a {
   text-decoration: none;
   color: black;
   font-size: 24px;
+}
+
+#login {
+  grid-column: 1 / 2;
+}
+
+#heart {
+  grid-column: 2 / 3;
+}
+
+#cart {
+  grid-column: 3 / 4;
+  position: relative;
+}
+
+#cart p {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  font-size: 16px;
+  color: white;
+  background-color: red;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  text-align: center;
 }
 
 header form {

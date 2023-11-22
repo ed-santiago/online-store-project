@@ -117,6 +117,13 @@ function starRating(rating) {
   return ratingStar;
 }
 
+const cartCount = document.querySelector("#cart p")
+if(cartCount.textContent < 1) {
+  cartCount.style.display = "none"
+} else {
+  cartCount.style.display = "block"
+}
+
 //Modal
 
 const cart = document.querySelector("#cart")
