@@ -117,11 +117,20 @@ function starRating(rating) {
   return ratingStar;
 }
 
+//Count to cart and heart
+
 const cartCount = document.querySelector("#cart p")
 if(cartCount.textContent < 1) {
   cartCount.style.display = "none"
 } else {
   cartCount.style.display = "block"
+}
+
+const heartCount = document.querySelector("#heart p")
+if(heartCount.textContent < 1) {
+  heartCount.style.display = "none"
+} else {
+  heartCount.style.display = "block"
 }
 
 //Modal
