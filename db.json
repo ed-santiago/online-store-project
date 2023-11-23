@@ -302,5 +302,7 @@
     }
   ],
   "cart": [],
-  "favourite": []
+  "cartCount": 0,
+  "favourite": [],
+  "favouriteCount": 0
 }

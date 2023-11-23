@@ -82,12 +82,12 @@ header nav ul li a{
   position: relative;
 }
 
-#heart p {
+#heartCount {
   position: absolute;
   top: 0;
   right: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   background-color: red;
   height: 16px;
@@ -101,12 +101,12 @@ header nav ul li a{
   position: relative;
 }
 
-#cart p {
+#cartCount {
   position: absolute;
   top: 0;
   right: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   background-color: red;
   height: 16px;
