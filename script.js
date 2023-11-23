@@ -1,25 +1,21 @@
 const productAPI = "http://localhost:3000/products"
 const cartAPI = "http://localhost:3000/cart"
 const favouriteAPI = "http://localhost:3000/favourite"
+const cartCountAPI = "http://localhost:3000/cartCount"
+const favouriteCountAPI = "http://localhost:3000/favouriteCount"
 
 const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
 
 //Count to cart and heart
 
-const cartCount = document.querySelector("#cart p")
-if (cartCount.textContent < 1) {
-  cartCount.style.display = "none"
-} else {
-  cartCount.style.display = "block"
-}
+const cartCountElement = document.querySelector("#cartCount")
 
-const heartCount = document.querySelector("#heart p")
-if (heartCount.textContent < 1) {
-  heartCount.style.display = "none"
-} else {
-  heartCount.style.display = "block"
-}
+fetch(cartCountAPI)
+.then(res => res.json())
+.then(cartCount => {
+  cartCountElement.textContent = cartCount.count;
+})
 
 //Modal
 
@@ -127,9 +123,9 @@ function renderProduct(product) {
         price: product.price.originalPrice,
         salePrice: product.price.salePrice
       })
-      .then(res => res.json())
-      .then(cartItem => renderCartItem(cartItem))
     })
+    .then(res => res.json())
+    .then(cartItem => renderCartItem(cartItem))
   })
 
   //set price to sale
@@ -156,6 +152,16 @@ function renderProduct(product) {
   div.addEventListener("mouseleave", () => {
     div.style.transform = "scale(1)";
   })
+
+  //Cart Count
+
+  cartBtn.addEventListener("toggle", (event) => {
+    if (event.newState === "open") {
+    console.log("Popover has been shown");
+  } else {
+    console.log("Popover has been hidden");
+  }
+  })
 }
 
 //star rating for product cards
@@ -169,6 +175,20 @@ function starRating(rating) {
 
   return ratingStar;
 }
+
+/*const cartCount = document.querySelector("#cartCount")
+if (cartCount.textContent < 1) {
+  cartCount.style.display = "none"
+} else {
+  cartCount.style.display = "block"
+}
+
+const heartCount = document.querySelector("#heartCount")
+if (heartCount.textContent < 1) {
+  heartCount.style.display = "none"
+} else {
+  heartCount.style.display = "block"
+}*/
 
 //Render products onto cart
 

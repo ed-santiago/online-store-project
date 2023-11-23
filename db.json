@@ -302,7 +302,11 @@
     }
   ],
   "cart": [],
-  "cartCount": 0,
+  "cartCount": {
+    "count": 0
+  },
   "favourite": [],
-  "favouriteCount": 0
+  "favouriteCount": {
+    "count": 0
+  }
 }
