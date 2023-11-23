@@ -112,6 +112,8 @@ function renderProduct(product) {
   priceDiv.innerHTML = sale()
   infoDiv.append(priceDiv)
 
+  //Add to cart db.json
+
   cartBtn.addEventListener("click", () => {
     fetch(cartAPI, {
       method: "POST",
@@ -125,9 +127,9 @@ function renderProduct(product) {
         price: product.price.originalPrice,
         salePrice: product.price.salePrice
       })
+      .then(res => res.json())
+      .then(cartItem => renderCartItem(cartItem))
     })
-    .then(res => res.json())
-    .then(cartItem => renderCartItem(cartItem))
   })
 
   //set price to sale
@@ -154,7 +156,6 @@ function renderProduct(product) {
   div.addEventListener("mouseleave", () => {
     div.style.transform = "scale(1)";
   })
-
 }
 
 //star rating for product cards
@@ -169,6 +170,8 @@ function starRating(rating) {
   return ratingStar;
 }
 
+//Render products onto cart
+
 fetch(cartAPI)
 .then(res => res.json())
 .then(cartItems => renderCartItems(cartItems))
@@ -178,11 +181,13 @@ function renderCartItems(cartItems) {
 }
 
 function renderCartItem(cartItem) {
+  
   //Image
   const itemDiv = document.createElement("div")
   itemDiv.classList.add("item")
   productCart.append(itemDiv)
 
+  
   const cartImg = document.createElement("img")
   cartImg.src = cartItem.image
   itemDiv.append(cartImg)
@@ -230,6 +235,22 @@ function renderCartItem(cartItem) {
   const removeBtn = document.createElement("button")
   removeBtn.textContent = "REMOVE"
   removeDiv.append(removeBtn)
+
+  //Remove product from cart
+
+  removeBtn.addEventListener("click", () => {
+    itemDiv.remove();
+    titleDiv.remove();
+    quantityDiv.remove();
+    priceCartDiv.remove();
+    removeDiv.remove();
+    fetch(`${cartAPI}/${cartItem.id}`, {
+      method: "DELETE",
+      header: {
+        "Content-Type": "application/json"
+      }
+    })
+  })
 }
 
 /*cartBtn.addEventListener("click", () => {

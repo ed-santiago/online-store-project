@@ -301,63 +301,6 @@
       }
     }
   ],
-  "cart": [
-    {
-      "image": "images/2-blackandwhiteshirt.jpg",
-      "title": "Mens Casual Premium Slim Fit T-Shirts ",
-      "quantity": 1,
-      "price": 80,
-      "salePrice": 48,
-      "id": 1
-    },
-    {
-      "image": "images/3-jacket.jpg",
-      "title": "Mens Cotton Jacket",
-      "quantity": 1,
-      "price": 100,
-      "salePrice": 50,
-      "id": 2
-    },
-    {
-      "image": "images/4-blueshirt.jpg",
-      "title": "Mens Casual Slim Fit",
-      "quantity": 1,
-      "price": 90,
-      "salePrice": 63,
-      "id": 3
-    },
-    {
-      "image": "images/6-bracelet.jpg",
-      "title": "Solid Gold Petite Micropave ",
-      "quantity": 1,
-      "price": 200,
-      "salePrice": 0,
-      "id": 4
-    },
-    {
-      "image": "images/7-ring.jpg",
-      "title": "White Gold Plated Princess",
-      "quantity": 1,
-      "price": 100,
-      "salePrice": 0,
-      "id": 5
-    },
-    {
-      "image": "images/8-earrings.jpg",
-      "title": "Pierced Owl",
-      "quantity": 1,
-      "price": 10,
-      "salePrice": 0,
-      "id": 6
-    },
-    {
-      "image": "images/13-monitor.jpg",
-      "title": "Acer SB220Q bi",
-      "quantity": 1,
-      "price": 600,
-      "salePrice": 0,
-      "id": 7
-    }
-  ],
+  "cart": [],
   "favourite": []
 }

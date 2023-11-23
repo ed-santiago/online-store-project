@@ -391,6 +391,7 @@ p ion-icon {
   text-decoration: none;
   padding: 10px 18px;
   font-size: 10px;
+  cursor: pointer;
 }
 
 #total {
