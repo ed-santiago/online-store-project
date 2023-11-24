@@ -6,6 +6,7 @@ const cartCountElement = document.querySelector("#cartCount")
 const productSectionH1 = document.querySelector("#productSection h1")
 
 let cartCounter = 0;
+let total = [];
 
 //Modal
 
@@ -191,7 +192,7 @@ function renderCartItem(cartItem) {
   productCart.append(priceCartDiv)
 
   const priceCartP = document.createElement("p")
-  priceCartP.innerHTML = cartSalePrice()
+  priceCartP.textContent = `$${cartSalePrice()}`
   priceCartDiv.append(priceCartP)
 
   //Remove
@@ -206,13 +207,9 @@ function renderCartItem(cartItem) {
   //Show sale price if it has sale
 
   function cartSalePrice() {
-    let priceHTML = `
-      $${cartItem.price.originalPrice}
-    `
+    let priceHTML = cartItem.price.originalPrice
     if (cartItem.price.salePrice > 0) {
-      priceHTML = `
-        $${cartItem.price.salePrice}
-      `
+      priceHTML = cartItem.price.salePrice
     }
     return priceHTML;
   }
@@ -250,7 +247,15 @@ function renderCartItem(cartItem) {
   }
 
   //Total price of cart
+  const totalElement = document.querySelector("#total")
+  total.push(cartSalePrice())
+  const totalCart = total.reduce(sum, 0)
+
+  function sum(total, num) {
+    return total + num;
+  }
   
+  totalElement.textContent = `Total: $${totalCart}`;
 }
 
 //Hide cart count if it's 0
