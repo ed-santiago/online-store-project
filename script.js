@@ -8,25 +8,15 @@ const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
 const cartCountElement = document.querySelector("#cartCount")
 
+//Render cart count
+
 const cartCounter = []
 
 fetch(cartCountAPI)
   .then(res => res.json())
   .then(counter => {
     cartCounter.push(counter.count);
-    showCartCount(counter.count);
   })
-
-//Hide cart count and heart count if 0
-
-function showCartCount(counterCount) {
-  if (cartCounter[0] > 0) {
-    cartCountElement.style.display = "block"
-    cartCountElement.textContent = counterCount
-  } else {
-    cartCountElement.style.display = "none"
-  }
-}
 
 //Modal
 
@@ -165,43 +155,7 @@ function renderProduct(product) {
     div.style.transform = "scale(1)";
   })
 
-  //Cart Count
-
-  /*cartBtn.addEventListener("click", () => {
-    fetch(cartCountAPI)
-      .then(res => res.json())
-      .then(cartCount => {
-        if (!cartBtn.dataset.clicked) {
-          cartBtn.setAttribute("data-clicked", "true");
-          fetch(cartCountAPI, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              count: cartCount.count += 1
-            })
-          })
-          cartCountElement.textContent = cartCount.count;
-          cartBtn.style.color = "white";
-          cartBtn.style.backgroundColor = "purple";
-        } else {
-          cartBtn.removeAttribute("data-clicked")
-          fetch(cartCountAPI, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              count: cartCount.count -= 1
-            })
-          })
-          cartCountElement.textContent = cartCount.count;
-          cartBtn.style.color = "black";
-          cartBtn.style.backgroundColor = "white";
-        }
-      })
-  })*/
+  //Increment cart count
 
   cartBtn.addEventListener("click", () => {
 
@@ -300,9 +254,23 @@ function renderCartItem(cartItem) {
   removeBtn.textContent = "REMOVE"
   removeDiv.append(removeBtn)
 
-  //Remove product from cart
+  //Remove product from cart and decrease cart count
 
   removeBtn.addEventListener("click", () => {
+    fetch(cartCountAPI, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        count: cartCounter[0] -= 1
+      })
+    })
+    .then(res => res.json())
+      .then(counter => {
+        showCartCount(counter.count);
+      })
+
     itemDiv.remove();
     titleDiv.remove();
     quantityDiv.remove();
@@ -315,4 +283,23 @@ function renderCartItem(cartItem) {
       }
     })
   })
+}
+
+//Render cart count
+
+fetch(cartCountAPI)
+  .then(res => res.json())
+  .then(counter => {
+    showCartCount(counter.count);
+  })
+
+//Hide cart count and heart count if 0
+
+function showCartCount(counterCount) {
+  if (cartCounter[0] > 0) {
+    cartCountElement.style.display = "block"
+    cartCountElement.textContent = counterCount
+  } else {
+    cartCountElement.style.display = "none"
+  }
 }
