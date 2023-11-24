@@ -369,3 +369,20 @@ electronicsFilter.addEventListener("click", (e) => {
 })
 
 //Search
+const searchBar = document.querySelector("#search")
+searchBar.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const searchValue = input_field.value.toLowerCase();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+  .then(res => res.json())
+  .then(searches => {
+    const searchArray = Array.from(searches)
+    const filteredSearch = searchArray.filter(search =>
+    search.title.toLowerCase().includes(searchValue))
+
+    filteredSearch.forEach(product => {
+      renderProduct(product)
+    })
+  })
+})
