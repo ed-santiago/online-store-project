@@ -5,6 +5,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   font-family: Arial, Helvetica, sans-serif;
+  height: 2000px;
 }
 
 img {
@@ -44,13 +45,17 @@ header nav ul {
 
 header nav ul li {
   display: inline-block;
-  padding: 0px 30px;
-}
-
-header nav ul li a{
+  padding: 15px 30px;
   text-decoration: none;
   color: black;
   font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+header nav ul li:hover {
+  background-color: rgb(122, 66, 122);
+  color: white;
 }
 
 #login-container {
@@ -88,8 +93,6 @@ header nav ul li a{
   right: 0;
   margin: 0;
   font-size: 14px;
-  color: white;
-  background-color: red;
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -109,8 +112,8 @@ header nav ul li a{
   font-size: 14px;
   color: white;
   background-color: red;
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
   text-align: center;
 }
@@ -132,7 +135,8 @@ header form {
 }
 
 #submit-btn {
-  background: gray;
+  background: rgb(122, 66, 122);
+  color: white;
   padding: 5px 10px;
   border: none;
   outline: none;
@@ -157,20 +161,23 @@ form ion-icon {
   height: 550px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 100px;
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 #hero h1 {
   margin: 0;
   color: antiquewhite;
-  font-size: 80px;
+  font-size: 60px;
   font-weight: normal;
   text-align: center;
 }
 
 #fifty-off {
-  font-size: 120px;
+  font-size: 140px;
   font-weight: bold;
+  font-family: cursive;
 }
 
 #hero-btns {
@@ -188,11 +195,16 @@ form ion-icon {
   text-decoration: none;
   font-size: 24px;
   rotate: -4deg;
+  cursor: pointer;
+}
+
+#hero-btns button:hover {
+  rotate: 8deg;
 }
 
 /*---PRODUCT SECTION---*/
 
-#product-section h1 {
+#productSection h1 {
   font-size: 48px;
   text-align: center;
 }
@@ -252,11 +264,28 @@ form ion-icon {
   align-items: center;
 }
 
-.price {
+.category-and-rating > * {
+  margin: 5px;
+}
+
+.productPrice {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 24px;
+}
+
+.productPrice > * {
+  margin: 5px;
+}
+
+.productPrice p {
+  padding: 10px 15px;
+}
+
+.productSale {
+  background-color: red;
+  color: white;
 }
 
 p ion-icon {
@@ -408,5 +437,18 @@ p ion-icon {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  background-color: palevioletred;
+  background-color: rgb(122, 66, 122);
+  color: white;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }

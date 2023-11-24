@@ -7,6 +7,8 @@ const favouriteCountAPI = "http://localhost:3000/favouriteCount"
 const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
 const cartCountElement = document.querySelector("#cartCount")
+const productSectionH1 = document.querySelector("#productSection h1")
+console.log(productSectionH1)
 
 //Render cart count
 
@@ -106,7 +108,7 @@ function renderProduct(product) {
   infoDiv.append(productTitle)
 
   const priceDiv = document.createElement("p")
-  priceDiv.classList.add("price")
+  priceDiv.classList.add("productPrice")
   priceDiv.innerHTML = sale()
   infoDiv.append(priceDiv)
 
@@ -134,12 +136,12 @@ function renderProduct(product) {
 
   function sale() {
     let priceHTML = `
-      <p>${product.price.originalPrice}</p>
+      <p>$${product.price.originalPrice}</p>
     `
     if (product.category === "men's clothing" || product.category === "women's clothing") {
       priceHTML = `
-        <p><s>${product.price.originalPrice}</s></p>
-        <p>${product.price.salePrice}</p>
+        <p>$<s>${product.price.originalPrice}</s></p>
+        <p class="productSale">$${product.price.salePrice}</p>
       `
     }
     return priceHTML;
@@ -307,13 +309,31 @@ function showCartCount(counterCount) {
 //Men's filter
 const menFilter = document.querySelector("#men-filter")
 menFilter.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Mens"
   e.preventDefault();
   productSection.innerHTML = ''
   fetch(productAPI)
     .then(res => res.json())
     .then(mens => {
       mens.forEach(men => {
-        if(men.category === "men's clothing") {
+        if(men.category === "Men's clothing") {
+          renderProduct(men)
+        }
+      })
+    })
+})
+
+//Shop Men
+const shopMen = document.querySelector("#shopMen")
+shopMen.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Mens Sale"
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(mens => {
+      mens.forEach(men => {
+        if(men.category === "Men's clothing") {
           renderProduct(men)
         }
       })
@@ -323,13 +343,31 @@ menFilter.addEventListener("click", (e) => {
 //Women's filter
 const womenFilter = document.querySelector("#women-filter")
 womenFilter.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Womens"
   e.preventDefault();
   productSection.innerHTML = ''
   fetch(productAPI)
     .then(res => res.json())
     .then(womens => {
       womens.forEach(women => {
-        if(women.category === "women's clothing") {
+        if(women.category === "Women's clothing") {
+          renderProduct(women)
+        }
+      })
+    })
+})
+
+//Shop Women
+const shopWomen = document.querySelector("#shopWomen")
+shopWomen.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Womens Sale"
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(womens => {
+      womens.forEach(women => {
+        if(women.category === "Women's clothing") {
           renderProduct(women)
         }
       })
@@ -339,13 +377,14 @@ womenFilter.addEventListener("click", (e) => {
 //Jewellery filter
 const jewelleryFilter = document.querySelector("#jewellery-filter")
 jewelleryFilter.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Jewellery"
   e.preventDefault();
   productSection.innerHTML = ''
   fetch(productAPI)
     .then(res => res.json())
     .then(jewelleries => {
       jewelleries.forEach(jewellery => {
-        if(jewellery.category === "jewellery") {
+        if(jewellery.category === "Jewellery") {
           renderProduct(jewellery)
         }
       })
@@ -355,13 +394,14 @@ jewelleryFilter.addEventListener("click", (e) => {
 //Electronics filter
 const electronicsFilter = document.querySelector("#electronics-filter")
 electronicsFilter.addEventListener("click", (e) => {
+  productSectionH1.textContent = "Electronics"
   e.preventDefault();
   productSection.innerHTML = ''
   fetch(productAPI)
     .then(res => res.json())
     .then(electronics => {
       electronics.forEach(electronic => {
-        if(electronic.category === "electronics") {
+        if(electronic.category === "Electronics") {
           renderProduct(electronic)
         }
       })
@@ -371,6 +411,7 @@ electronicsFilter.addEventListener("click", (e) => {
 //Search
 const searchBar = document.querySelector("#search")
 searchBar.addEventListener("submit", (e) => {
+  productSectionH1.textContent = "Searched Products"
   e.preventDefault();
   const searchValue = input_field.value.toLowerCase();
   productSection.innerHTML = ''
@@ -386,3 +427,5 @@ searchBar.addEventListener("submit", (e) => {
     })
   })
 })
+
+const checkOut = document.querySelector("#checkout")
