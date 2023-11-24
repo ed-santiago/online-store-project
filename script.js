@@ -6,16 +6,27 @@ const favouriteCountAPI = "http://localhost:3000/favouriteCount"
 
 const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
-
-//Count to cart and heart
-
 const cartCountElement = document.querySelector("#cartCount")
 
+const cartCounter = []
+
 fetch(cartCountAPI)
-.then(res => res.json())
-.then(cartCount => {
-  cartCountElement.textContent = cartCount.count;
-})
+  .then(res => res.json())
+  .then(counter => {
+    cartCounter.push(counter.count);
+    showCartCount(counter.count);
+  })
+
+//Hide cart count and heart count if 0
+
+function showCartCount(counterCount) {
+  if (cartCounter[0] > 0) {
+    cartCountElement.style.display = "block"
+    cartCountElement.textContent = counterCount
+  } else {
+    cartCountElement.style.display = "none"
+  }
+}
 
 //Modal
 
@@ -67,6 +78,7 @@ function renderProduct(product) {
 
   const cartBtn = document.createElement("button")
   cartBtn.type = "button"
+  cartBtn.classList.add("cartBtn")
   cartBtn.innerHTML = "<ion-icon name=\"cart\"></ion-icon>"
   cardBtnsDiv.append(cartBtn)
 
@@ -124,8 +136,8 @@ function renderProduct(product) {
         salePrice: product.price.salePrice
       })
     })
-    .then(res => res.json())
-    .then(cartItem => renderCartItem(cartItem))
+      .then(res => res.json())
+      .then(cartItem => renderCartItem(cartItem))
   })
 
   //set price to sale
@@ -155,13 +167,59 @@ function renderProduct(product) {
 
   //Cart Count
 
-  cartBtn.addEventListener("toggle", (event) => {
-    if (event.newState === "open") {
-    console.log("Popover has been shown");
-  } else {
-    console.log("Popover has been hidden");
-  }
+  /*cartBtn.addEventListener("click", () => {
+    fetch(cartCountAPI)
+      .then(res => res.json())
+      .then(cartCount => {
+        if (!cartBtn.dataset.clicked) {
+          cartBtn.setAttribute("data-clicked", "true");
+          fetch(cartCountAPI, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              count: cartCount.count += 1
+            })
+          })
+          cartCountElement.textContent = cartCount.count;
+          cartBtn.style.color = "white";
+          cartBtn.style.backgroundColor = "purple";
+        } else {
+          cartBtn.removeAttribute("data-clicked")
+          fetch(cartCountAPI, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              count: cartCount.count -= 1
+            })
+          })
+          cartCountElement.textContent = cartCount.count;
+          cartBtn.style.color = "black";
+          cartBtn.style.backgroundColor = "white";
+        }
+      })
+  })*/
+
+  cartBtn.addEventListener("click", () => {
+
+    fetch(cartCountAPI, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        count: cartCounter[0] += 1
+      })
+    })
+    .then(res => res.json())
+      .then(counter => {
+        showCartCount(counter.count);
+      })
   })
+
 }
 
 //star rating for product cards
@@ -176,38 +234,24 @@ function starRating(rating) {
   return ratingStar;
 }
 
-/*const cartCount = document.querySelector("#cartCount")
-if (cartCount.textContent < 1) {
-  cartCount.style.display = "none"
-} else {
-  cartCount.style.display = "block"
-}
-
-const heartCount = document.querySelector("#heartCount")
-if (heartCount.textContent < 1) {
-  heartCount.style.display = "none"
-} else {
-  heartCount.style.display = "block"
-}*/
-
 //Render products onto cart
 
 fetch(cartAPI)
-.then(res => res.json())
-.then(cartItems => renderCartItems(cartItems))
+  .then(res => res.json())
+  .then(cartItems => renderCartItems(cartItems))
 
 function renderCartItems(cartItems) {
   cartItems.forEach(cartItem => renderCartItem(cartItem))
 }
 
 function renderCartItem(cartItem) {
-  
+
   //Image
   const itemDiv = document.createElement("div")
   itemDiv.classList.add("item")
   productCart.append(itemDiv)
 
-  
+
   const cartImg = document.createElement("img")
   cartImg.src = cartItem.image
   itemDiv.append(cartImg)
@@ -272,130 +316,3 @@ function renderCartItem(cartItem) {
     })
   })
 }
-
-/*cartBtn.addEventListener("click", () => {
-  fetch(cartAPI, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      image: `${product.image}`,
-      title: `${product.title}`,
-      quantity: 1,
-      price: product.price.originalPrice,
-      salePrice: product.price.salePrice
-    })
-  })
-  .then(res => res.json())
-  .then(cartItem => {
-    //Image
-    const itemDiv = document.createElement("div")
-    itemDiv.classList.add("item")
-    productCart.append(itemDiv)
-
-    const cartImg = document.createElement("img")
-    cartImg.src = cartItem.image
-    itemDiv.append(cartImg)
-
-    //Title
-    const titleDiv = document.createElement("div")
-    titleDiv.classList.add("title")
-    productCart.append(titleDiv)
-
-    const titleP = document.createElement("p")
-    titleP.textContent = cartItem.title;
-    titleDiv.append(titleP)
-
-    //Quantity
-    const quantityDiv = document.createElement("div")
-    quantityDiv.classList.add("quantity")
-    productCart.append(quantityDiv)
-
-    const leftBtn = document.createElement("button")
-    leftBtn.innerHTML = "<ion-icon name=\"caret-back-outline\"></ion-icon>"
-    quantityDiv.append(leftBtn)
-
-    const quantityP = document.createElement("p")
-    quantityP.textContent = cartItem.quantity
-    quantityDiv.append(quantityP)
-
-    const rightBtn = document.createElement("button")
-    rightBtn.innerHTML = "<ion-icon name=\"caret-forward-outline\"></ion-icon>"
-    quantityDiv.append(rightBtn)
-
-    //Price
-    const priceCartDiv = document.createElement("div")
-    priceCartDiv.classList.add("price")
-    productCart.append(priceCartDiv)
-
-    const priceCartP = document.createElement("p")
-    priceCartP.textContent = cartItem.price
-    priceCartDiv.append(priceCartP)
-
-    //Remove
-    const removeDiv = document.createElement("div")
-    removeDiv.classList.add("remove")
-    productCart.append(removeDiv)
-
-    const removeBtn = document.createElement("button")
-    removeBtn.textContent = "REMOVE"
-    removeDiv.append(removeBtn)
-  })
-})*/
-
-/*const div = document.createElement("div")
-  div.classList.add("product-card")
-  productSection.append(div)
-
-  div.innerHTML = `
-    <div class="img-div">
-      <div class="card-buttons">
-        <button type="button"><ion-icon name="eye-outline"></ion-icon></button>
-        <button type="button"><ion-icon name="cart"></ion-icon></button>
-        <button type="button"><ion-icon name="heart"></ion-icon></button>
-      </div>
-      <img class="product-image" src="${product.image}" alt="product image"/>
-    </div>
-    <div class="product-info">
-      <div class="category-and-rating">
-        <p>${product.category}</p>
-        <p>${starRating(product.rating.rate)}
-      </div>
-      <h3>${product.title}</h3>
-      ${sale()}
-    </div>
-    `*/
-
-    /*productCart.innerHTML = `
-      <div id="item">
-        <div id="item-and-info">
-          <img src="${cartItem.image}" />
-          <p>${cartItem.title}</p>
-        </div>
-      </div>
-
-      <div id="quantity">
-        <p>${cartItem.quantity}</p>
-      </div>
-
-      <div id="price">
-        <p>${cartItem.price}</p>
-      </div>
-      `*/
-
-      /*const itemDiv = document.createElement("div")
-      itemDiv.classList.add("item");
-      productCart.append(itemDiv)
-
-      const itemAndInfoDiv = document.createElement("div")
-      itemAndInfoDiv.classList.add("item-and-info");
-      itemDiv.append(itemAndInfoDiv)
-
-      const cartImg = document.createElement("img")
-      cartImg.src = cartItem.image;
-      itemAndInfoDiv.append(cartImg)
-
-      const cartP = document.createElement("p")
-      cartP.textContent = cartItem.title;
-      itemAndInfoDiv.append(cartP)*/
