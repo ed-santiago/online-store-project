@@ -394,6 +394,7 @@ p ion-icon {
   border: none;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /*PRICE*/

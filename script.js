@@ -207,27 +207,50 @@ function renderCartItem(cartItem) {
 
   function cartSalePrice() {
     let priceHTML = `
-      <p>$${cartItem.price.originalPrice}</p>
+      $${cartItem.price.originalPrice}
     `
     if (cartItem.price.salePrice > 0) {
       priceHTML = `
-        <p>$${cartItem.price.salePrice}</p>
+        $${cartItem.price.salePrice}
       `
     }
     return priceHTML;
   }
 
+  //Increase or decrease quantity
+
+  leftBtn.addEventListener("click", () => {
+    quantityP.textContent--
+    if (quantityP.textContent = 1) {
+      removeItem();
+      cartCounter--;
+      showCartCount();
+    }
+  })
+
+  rightBtn.addEventListener("click", () => {
+    quantityP.textContent++
+    console.log(priceCartP.textContent)
+  })
+
   //Remove product from cart and decrease cart count
 
   removeBtn.addEventListener("click", () => {
+    removeItem();
+    cartCounter--;
+    showCartCount();
+  })
+
+  function removeItem() {
     itemDiv.remove();
     titleDiv.remove();
     quantityDiv.remove();
     priceCartDiv.remove();
     removeDiv.remove();
-    cartCounter--;
-    showCartCount();
-  })
+  }
+
+  //Total price of cart
+  
 }
 
 //Hide cart count if it's 0
