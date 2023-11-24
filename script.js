@@ -303,3 +303,69 @@ function showCartCount(counterCount) {
     cartCountElement.style.display = "none"
   }
 }
+
+//Men's filter
+const menFilter = document.querySelector("#men-filter")
+menFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(mens => {
+      mens.forEach(men => {
+        if(men.category === "men's clothing") {
+          renderProduct(men)
+        }
+      })
+    })
+})
+
+//Women's filter
+const womenFilter = document.querySelector("#women-filter")
+womenFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(womens => {
+      womens.forEach(women => {
+        if(women.category === "women's clothing") {
+          renderProduct(women)
+        }
+      })
+    })
+})
+
+//Jewellery filter
+const jewelleryFilter = document.querySelector("#jewellery-filter")
+jewelleryFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(jewelleries => {
+      jewelleries.forEach(jewellery => {
+        if(jewellery.category === "jewellery") {
+          renderProduct(jewellery)
+        }
+      })
+    })
+})
+
+//Electronics filter
+const electronicsFilter = document.querySelector("#electronics-filter")
+electronicsFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  productSection.innerHTML = ''
+  fetch(productAPI)
+    .then(res => res.json())
+    .then(electronics => {
+      electronics.forEach(electronic => {
+        if(electronic.category === "electronics") {
+          renderProduct(electronic)
+        }
+      })
+    })
+})
+
+//Search
