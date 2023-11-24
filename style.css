@@ -116,6 +116,7 @@ header nav ul li:hover {
   width: 18px;
   border-radius: 50%;
   text-align: center;
+  display: none;
 }
 
 header form {
@@ -439,16 +440,5 @@ p ion-icon {
   font-size: 16px;
   background-color: rgb(122, 66, 122);
   color: white;
-}
-
-@keyframes transitionIn {
-  from {
-    opacity: 0;
-    transform: rotateX(-10deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: rotateX(0);
-  }
+  cursor: pointer;
 }

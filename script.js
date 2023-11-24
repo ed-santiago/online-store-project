@@ -1,24 +1,11 @@
 const productAPI = "http://localhost:3000/products"
-const cartAPI = "http://localhost:3000/cart"
-const favouriteAPI = "http://localhost:3000/favourite"
-const cartCountAPI = "http://localhost:3000/cartCount"
-const favouriteCountAPI = "http://localhost:3000/favouriteCount"
 
 const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
 const cartCountElement = document.querySelector("#cartCount")
 const productSectionH1 = document.querySelector("#productSection h1")
-console.log(productSectionH1)
 
-//Render cart count
-
-const cartCounter = []
-
-fetch(cartCountAPI)
-  .then(res => res.json())
-  .then(counter => {
-    cartCounter.push(counter.count);
-  })
+let cartCounter = 0;
 
 //Modal
 
@@ -112,24 +99,12 @@ function renderProduct(product) {
   priceDiv.innerHTML = sale()
   infoDiv.append(priceDiv)
 
-  //Add to cart db.json
+  //Add to cart and increment cart count
 
   cartBtn.addEventListener("click", () => {
-    fetch(cartAPI, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        image: `${product.image}`,
-        title: `${product.title}`,
-        quantity: 1,
-        price: product.price.originalPrice,
-        salePrice: product.price.salePrice
-      })
-    })
-      .then(res => res.json())
-      .then(cartItem => renderCartItem(cartItem))
+    renderCartItem(product);
+    cartCounter++
+    showCartCount();
   })
 
   //set price to sale
@@ -138,9 +113,9 @@ function renderProduct(product) {
     let priceHTML = `
       <p>$${product.price.originalPrice}</p>
     `
-    if (product.category === "men's clothing" || product.category === "women's clothing") {
+    if (product.category === "Men's clothing" || product.category === "Women's clothing") {
       priceHTML = `
-        <p>$<s>${product.price.originalPrice}</s></p>
+        <p><s>$${product.price.originalPrice}</s></p>
         <p class="productSale">$${product.price.salePrice}</p>
       `
     }
@@ -156,26 +131,6 @@ function renderProduct(product) {
   div.addEventListener("mouseleave", () => {
     div.style.transform = "scale(1)";
   })
-
-  //Increment cart count
-
-  cartBtn.addEventListener("click", () => {
-
-    fetch(cartCountAPI, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        count: cartCounter[0] += 1
-      })
-    })
-    .then(res => res.json())
-      .then(counter => {
-        showCartCount(counter.count);
-      })
-  })
-
 }
 
 //star rating for product cards
@@ -191,14 +146,6 @@ function starRating(rating) {
 }
 
 //Render products onto cart
-
-fetch(cartAPI)
-  .then(res => res.json())
-  .then(cartItems => renderCartItems(cartItems))
-
-function renderCartItems(cartItems) {
-  cartItems.forEach(cartItem => renderCartItem(cartItem))
-}
 
 function renderCartItem(cartItem) {
 
@@ -244,7 +191,7 @@ function renderCartItem(cartItem) {
   productCart.append(priceCartDiv)
 
   const priceCartP = document.createElement("p")
-  priceCartP.textContent = cartItem.price
+  priceCartP.innerHTML = cartSalePrice()
   priceCartDiv.append(priceCartP)
 
   //Remove
@@ -256,53 +203,41 @@ function renderCartItem(cartItem) {
   removeBtn.textContent = "REMOVE"
   removeDiv.append(removeBtn)
 
+  //Show sale price if it has sale
+
+  function cartSalePrice() {
+    let priceHTML = `
+      <p>$${cartItem.price.originalPrice}</p>
+    `
+    if (cartItem.price.salePrice > 0) {
+      priceHTML = `
+        <p>$${cartItem.price.salePrice}</p>
+      `
+    }
+    return priceHTML;
+  }
+
   //Remove product from cart and decrease cart count
 
   removeBtn.addEventListener("click", () => {
-    fetch(cartCountAPI, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        count: cartCounter[0] -= 1
-      })
-    })
-    .then(res => res.json())
-      .then(counter => {
-        showCartCount(counter.count);
-      })
-
     itemDiv.remove();
     titleDiv.remove();
     quantityDiv.remove();
     priceCartDiv.remove();
     removeDiv.remove();
-    fetch(`${cartAPI}/${cartItem.id}`, {
-      method: "DELETE",
-      header: {
-        "Content-Type": "application/json"
-      }
-    })
+    cartCounter--;
+    showCartCount();
   })
 }
 
-//Render cart count
+//Hide cart count if it's 0
 
-fetch(cartCountAPI)
-  .then(res => res.json())
-  .then(counter => {
-    showCartCount(counter.count);
-  })
-
-//Hide cart count and heart count if 0
-
-function showCartCount(counterCount) {
-  if (cartCounter[0] > 0) {
-    cartCountElement.style.display = "block"
-    cartCountElement.textContent = counterCount
-  } else {
+function showCartCount() {
+  if (cartCounter === 0) {
     cartCountElement.style.display = "none"
+  } else {
+    cartCountElement.style.display = "block"
+    cartCountElement.textContent = cartCounter
   }
 }
 
@@ -316,7 +251,7 @@ menFilter.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(mens => {
       mens.forEach(men => {
-        if(men.category === "Men's clothing") {
+        if (men.category === "Men's clothing") {
           renderProduct(men)
         }
       })
@@ -333,7 +268,7 @@ shopMen.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(mens => {
       mens.forEach(men => {
-        if(men.category === "Men's clothing") {
+        if (men.category === "Men's clothing") {
           renderProduct(men)
         }
       })
@@ -350,7 +285,7 @@ womenFilter.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(womens => {
       womens.forEach(women => {
-        if(women.category === "Women's clothing") {
+        if (women.category === "Women's clothing") {
           renderProduct(women)
         }
       })
@@ -367,7 +302,7 @@ shopWomen.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(womens => {
       womens.forEach(women => {
-        if(women.category === "Women's clothing") {
+        if (women.category === "Women's clothing") {
           renderProduct(women)
         }
       })
@@ -384,7 +319,7 @@ jewelleryFilter.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(jewelleries => {
       jewelleries.forEach(jewellery => {
-        if(jewellery.category === "Jewellery") {
+        if (jewellery.category === "Jewellery") {
           renderProduct(jewellery)
         }
       })
@@ -401,7 +336,7 @@ electronicsFilter.addEventListener("click", (e) => {
     .then(res => res.json())
     .then(electronics => {
       electronics.forEach(electronic => {
-        if(electronic.category === "Electronics") {
+        if (electronic.category === "Electronics") {
           renderProduct(electronic)
         }
       })
@@ -416,16 +351,22 @@ searchBar.addEventListener("submit", (e) => {
   const searchValue = input_field.value.toLowerCase();
   productSection.innerHTML = ''
   fetch(productAPI)
-  .then(res => res.json())
-  .then(searches => {
-    const searchArray = Array.from(searches)
-    const filteredSearch = searchArray.filter(search =>
-    search.title.toLowerCase().includes(searchValue))
+    .then(res => res.json())
+    .then(searches => {
+      const searchArray = Array.from(searches)
+      const filteredSearch = searchArray.filter(search =>
+        search.title.toLowerCase().includes(searchValue))
 
-    filteredSearch.forEach(product => {
-      renderProduct(product)
+      filteredSearch.forEach(product => {
+        renderProduct(product)
+      })
     })
-  })
 })
 
-const checkOut = document.querySelector("#checkout")
+//Check out
+
+const checkout = document.querySelector("#checkout")
+checkout.addEventListener("click", () => {
+  alert("Thank you for your purchase!")
+  location.reload();
+})
