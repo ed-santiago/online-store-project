@@ -4,9 +4,11 @@ const productSection = document.querySelector("#product-collection")
 const products = document.querySelector(".products")
 const cartCountElement = document.querySelector("#cartCount")
 const productSectionH1 = document.querySelector("#productSection h1")
+const totalElement = document.querySelector("#total")
 
 let cartCounter = 0;
-let total = [];
+let subTotal = [];
+let total = 0;
 
 //Modal
 
@@ -192,7 +194,7 @@ function renderCartItem(cartItem) {
   productCart.append(priceCartDiv)
 
   const priceCartP = document.createElement("p")
-  priceCartP.textContent = `$${cartSalePrice()}`
+  priceCartP.textContent = cartSalePrice()
   priceCartDiv.append(priceCartP)
 
   //Remove
@@ -214,28 +216,43 @@ function renderCartItem(cartItem) {
     return priceHTML;
   }
 
-  //Increase or decrease quantity
+  //Increase or decrease quantity and total price of item
 
   leftBtn.addEventListener("click", () => {
-    quantityP.textContent--
-    if (quantityP.textContent = 1) {
-      removeItem();
-      cartCounter--;
-      showCartCount();
+    quantityP.textContent--;
+
+    totalPrice = quantityP.textContent * cartSalePrice()
+    priceCartP.textContent = totalPrice;
+    totalElement.textContent = total -= cartSalePrice();
+
+    if (quantityP.textContent === `${1}`) {
+      leftBtn.disabled = true;
     }
   })
 
+  //Disable left button
+  if (quantityP.textContent === `${1}`) {
+    leftBtn.disabled = true;
+  }
+
   rightBtn.addEventListener("click", () => {
-    quantityP.textContent++
-    console.log(priceCartP.textContent)
+    quantityP.textContent++;
+    
+    totalPrice = quantityP.textContent * cartSalePrice()
+    priceCartP.textContent = totalPrice;
+    totalElement.textContent = total += cartSalePrice();
+    leftBtn.disabled = false;
   })
 
-  //Remove product from cart and decrease cart count
+  //Remove product from cart
 
   removeBtn.addEventListener("click", () => {
     removeItem();
     cartCounter--;
     showCartCount();
+    total = totalElement.textContent - priceCartP.textContent
+
+    totalElement.textContent = total;
   })
 
   function removeItem() {
@@ -247,15 +264,7 @@ function renderCartItem(cartItem) {
   }
 
   //Total price of cart
-  const totalElement = document.querySelector("#total")
-  total.push(cartSalePrice())
-  const totalCart = total.reduce(sum, 0)
-
-  function sum(total, num) {
-    return total + num;
-  }
-  
-  totalElement.textContent = `Total: $${totalCart}`;
+  totalElement.textContent = total += cartSalePrice();
 }
 
 //Hide cart count if it's 0
