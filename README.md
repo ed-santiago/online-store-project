@@ -6,6 +6,8 @@ This projects purpose is to imitate how a real online store operates. It is buil
 
 The website has a couple of features such as categories, search filter and a fully functional cart. It has a main and hero section where the main section displays all the products available as well as their price, title and an image.
 
+Here is a blog about how I implemented a shopping cart feature in my project: https://medium.com/@edmond.santiago7/how-i-created-a-shopping-cart-feature-on-my-online-store-web-app-project-2624fcb1c20d
+
 ## Requirements
 To be able to navigate through this website, you will need to have JSON server installed globally in your machine, and fork and clone this directory.
 
