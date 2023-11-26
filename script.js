@@ -10,6 +10,8 @@ let cartCounter = 0;
 let subTotal = [];
 let total = 0;
 
+document.querySelector("header h1").addEventListener("click", () => location.reload())
+
 //Modal
 
 const productCart = document.querySelector("#product-cart")
