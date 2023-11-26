@@ -222,7 +222,7 @@ function renderCartItem(cartItem) {
   leftBtn.addEventListener("click", () => {
     quantityP.textContent--;
 
-    totalPrice = quantityP.textContent * cartSalePrice()
+    let totalPrice = quantityP.textContent * cartSalePrice()
     priceCartP.textContent = totalPrice;
     totalElement.textContent = total -= cartSalePrice();
 
@@ -239,7 +239,7 @@ function renderCartItem(cartItem) {
   rightBtn.addEventListener("click", () => {
     quantityP.textContent++;
 
-    totalPrice = quantityP.textContent * cartSalePrice()
+    let totalPrice = quantityP.textContent * cartSalePrice()
     priceCartP.textContent = totalPrice;
     totalElement.textContent = total += cartSalePrice();
     leftBtn.disabled = false;
