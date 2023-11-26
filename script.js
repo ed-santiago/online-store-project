@@ -7,7 +7,6 @@ const productSectionH1 = document.querySelector("#productSection h1")
 const totalElement = document.querySelector("#total")
 
 let cartCounter = 0;
-let subTotal = [];
 let total = 0;
 
 document.querySelector("header h1").addEventListener("click", () => location.reload())
@@ -239,7 +238,7 @@ function renderCartItem(cartItem) {
 
   rightBtn.addEventListener("click", () => {
     quantityP.textContent++;
-    
+
     totalPrice = quantityP.textContent * cartSalePrice()
     priceCartP.textContent = totalPrice;
     totalElement.textContent = total += cartSalePrice();
