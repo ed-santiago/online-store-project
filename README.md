@@ -24,6 +24,7 @@ You can now navigate through the website.
 ## Usage
 
 Here is a video about how to navigate through the website, showing you the different properties and functionalities the website has and can do.
+Link: https://youtu.be/cMMKAisFGag
 
 ## Contributing
 Feel free to fork and clone this repository, but merging to main branch is not allowed.
