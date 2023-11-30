@@ -453,3 +453,7 @@ p ion-icon {
   color: white;
   cursor: pointer;
 }
+
+.isFavourite {
+  color: red;
+}

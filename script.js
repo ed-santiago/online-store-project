@@ -8,6 +8,7 @@ const totalElement = document.querySelector("#total")
 
 let cartCounter = 0;
 let total = 0;
+let favourites = [];
 
 document.querySelector("header h1").addEventListener("click", () => location.reload())
 
@@ -109,6 +110,23 @@ function renderProduct(product) {
     renderCartItem(product);
     cartCounter++
     showCartCount();
+  })
+
+  //Add to favourite section and increment heart
+
+  heartBtn.addEventListener("click", () => {
+    
+    console.log(heartBtn.className)
+    if(heartBtn.className === "isFavourite") {
+      favourites = favourites.filter(title => title !== product.title)
+      
+    } else {
+      favourites.push(product.title)
+      
+    }
+    heartBtn.classList.toggle("isFavourite")
+
+    console.log(favourites)
   })
 
   //set price to sale
@@ -282,104 +300,58 @@ function showCartCount() {
 //Men's filter
 const menFilter = document.querySelector("#men-filter")
 menFilter.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Mens"
   e.preventDefault();
-  productSection.innerHTML = ''
-  fetch(productAPI)
-    .then(res => res.json())
-    .then(mens => {
-      mens.forEach(men => {
-        if (men.category === "Men's clothing") {
-          renderProduct(men)
-        }
-      })
-    })
+  productsFilter("Mens", "Men's clothing")
 })
 
 //Shop Men
 const shopMen = document.querySelector("#shopMen")
 shopMen.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Mens Sale"
   e.preventDefault();
-  productSection.innerHTML = ''
-  fetch(productAPI)
-    .then(res => res.json())
-    .then(mens => {
-      mens.forEach(men => {
-        if (men.category === "Men's clothing") {
-          renderProduct(men)
-        }
-      })
-    })
+  productsFilter("Mens Sale", "Men's clothing")
 })
 
 //Women's filter
 const womenFilter = document.querySelector("#women-filter")
 womenFilter.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Womens"
   e.preventDefault();
-  productSection.innerHTML = ''
-  fetch(productAPI)
-    .then(res => res.json())
-    .then(womens => {
-      womens.forEach(women => {
-        if (women.category === "Women's clothing") {
-          renderProduct(women)
-        }
-      })
-    })
+  productsFilter("Womens", "Women's clothing")
 })
 
 //Shop Women
 const shopWomen = document.querySelector("#shopWomen")
 shopWomen.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Womens Sale"
   e.preventDefault();
-  productSection.innerHTML = ''
-  fetch(productAPI)
-    .then(res => res.json())
-    .then(womens => {
-      womens.forEach(women => {
-        if (women.category === "Women's clothing") {
-          renderProduct(women)
-        }
-      })
-    })
+  productsFilter("Womens Sale", "Women's clothing")
 })
 
 //Jewellery filter
 const jewelleryFilter = document.querySelector("#jewellery-filter")
 jewelleryFilter.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Jewellery"
   e.preventDefault();
-  productSection.innerHTML = ''
-  fetch(productAPI)
-    .then(res => res.json())
-    .then(jewelleries => {
-      jewelleries.forEach(jewellery => {
-        if (jewellery.category === "Jewellery") {
-          renderProduct(jewellery)
-        }
-      })
-    })
+  productsFilter("Jewellery", "Jewellery")
 })
 
 //Electronics filter
 const electronicsFilter = document.querySelector("#electronics-filter")
 electronicsFilter.addEventListener("click", (e) => {
-  productSectionH1.textContent = "Electronics"
   e.preventDefault();
+  productsFilter("Electronics", "Electronics")
+})
+
+function productsFilter(title, category) {
+  productSectionH1.textContent = title
   productSection.innerHTML = ''
   fetch(productAPI)
     .then(res => res.json())
-    .then(electronics => {
-      electronics.forEach(electronic => {
-        if (electronic.category === "Electronics") {
-          renderProduct(electronic)
+    .then(products => {
+      products.forEach(product => {
+        if (product.category === category) {
+          renderProduct(product)
         }
       })
     })
-})
+}
 
 //Search
 const searchBar = document.querySelector("#search")
